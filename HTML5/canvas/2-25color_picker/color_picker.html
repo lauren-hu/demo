@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>color picker</title>
+	<style>
+		*{margin: 0;padding: 0;}
+		html,body{width: 100%;height: 100%;}
+		canvas{display: block;}
+	</style>
+	<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script type="text/javascript" src="jquery-latest.min.js"></script>	
+	<script>
+		$(function() {
+			var a_canvas = $("#dest");
+			var context = a_canvas.get(0).getContext("2d");
+			var img = new Image();
+
+			img.src = "palette.jpg";
+			$(img).load(function() {
+				context.drawImage(img, 0, 0, 843, 419);
+			});
+
+			a_canvas.click(function(ev) {
+				var canvasOffset = a_canvas.offset();
+				var canvasX = Math.floor(ev.pageX - canvasOffset.left);
+				var canvasY = Math.floor(ev.pageY - canvasOffset.top);
+
+				var ImageData = context.getImageData(canvasX, canvasY, 1, 1);
+				var pixel = ImageData.data;
+				var pixelColor = "rgba("+pixel[0]+","+pixel[1]+","+pixel[2]+","+pixel[3]+")";
+				$("body").css("background", pixelColor);
+			})
+		})
+	</script>
+</head>
+<body>
+	<canvas id="dest" width="850" height="420"></canvas>
+</body>
+</html>

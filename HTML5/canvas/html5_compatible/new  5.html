@@ -1,0 +1,24 @@
+﻿<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style type="text/css">
+		.first{width:200px;height:100px;background:#F90;line-height:100px;text-align:center;}
+		.second{width:200px;height:100px;background:#F60;line-height:100px;text-align:center;}
+		/*article{display: block;} 使用第二种方法时添加*/
+	</style>
+	
+	<!-- 兼容ie6~8方法一: -->
+	<!--[if lt IE 9]><script src="html5.js"></script><![endif]-->	 
+	<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<!--版本号低于9的浏览器渲染此页面时，加载此js，并且此js必须在使用元素之前声明，否则无效；使用超链接和外部文件链接均可-->
+
+	<!-- 兼容ie6~8方法二:用js创建新标签元素，然后用css为其设置样式 -->
+	<!--<script>document.createElement("article");</script>-->
+</head>
+<body>
+	<section class="first">I am the first section</section>
+	<section class="second">I am the first section</section>
+</body>
+</html>

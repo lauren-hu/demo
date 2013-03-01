@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas-img</title>
+	<script>
+		window.onload = function() {
+
+			var clock = function(){
+				var a_canvas = document.getElementById("a");
+				var context = a_canvas.getContext("2d");
+				var clock = document.getElementById("clock");
+				var time = new Date();
+				a_canvas.width=a_canvas.width;
+				// draw the background
+				context.drawImage(clock, 0, 0, 800, 495, 0, 0, 800, 495);
+				context.translate(408,227);
+				context.rotate(-Math.PI/2);
+				context.save();
+				
+				// draw the wheels
+				for (var i=0;i<12;i++){  
+					context.beginPath();  
+					context.rotate(Math.PI/6);  
+					context.moveTo(70,0);  
+					context.lineTo(90,0); 
+					context.lineWidth = 2; 
+					context.lineCap = "round";
+					context.strokeStyle = "#494843";
+					context.stroke();  
+				} 
+				for(var j = 0; j < 60; j++){
+					if (j%5 != 0) {
+						context.beginPath();
+						context.moveTo(88,0);
+						context.lineTo(90,0);
+						context.lineWidth = 2;
+						context.strokeStyle = "#210905";
+						context.stroke();
+					};
+					context.rotate(Math.PI/30);
+				}
+
+				// draw the pointer
+				context.restore();
+				context.save();
+
+				var hour = time.getHours();
+				var minute = time.getMinutes();
+				var second = time.getSeconds();
+				hour = hour>12 ? hour-12 : hour;
+				
+				// draw the hour pointer
+				context.beginPath();
+				context.rotate(hour*(Math.PI/6) + (Math.PI/360)*minute + (Math.PI/21600)*second);
+				context.moveTo(0,0);
+				context.lineTo(50,0);
+				context.lineCap = "round";			
+				context.fillStyle = "#360e16";
+				context.lineWidth = 5;
+				context.strokeStyle = "#360e16";
+				context.stroke();
+				
+				// draw the minute pointer
+				context.restore();
+				context.save();
+				context.beginPath();
+				context.rotate((Math.PI/30)*minute + (Math.PI/1800)*second);
+				context.moveTo(0,0);
+				context.lineTo(60,0);
+				context.lineCap = "round";		
+				context.fillStyle = "#360e16";
+				context.lineWidth = 3;
+				context.strokeStyle = "#040300";
+				context.stroke();
+				
+				// draw the second pointer
+				context.restore();
+				context.beginPath();
+				context.rotate((Math.PI/30)*second);
+				context.moveTo(0,0);
+				context.lineTo(60,0);
+				context.lineCap = "round";		
+				context.fillStyle = "#360e16";
+				context.lineWidth = 1;
+				context.strokeStyle = "#040300";
+				context.stroke();
+			}
+
+			clock();
+			setInterval(clock,1000);
+			
+		}
+	</script>
+</head>
+<body>
+	<img id="clock" src="clock_bg.jpg" alt="clock" style="display:none">
+	<canvas id="a" width="800px" height="495px"></canvas>
+</body>
+</html>

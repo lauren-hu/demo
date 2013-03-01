@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>画布大小随浏览器大小而变</title>
+	<style>
+		*{margin: 0;padding: 0;}
+		html,body{width: 100%;height: 100%;}
+		canvas{display: block;}
+	</style>
+	<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script type="text/javascript" src="jquery-latest.min.js"></script>
+</head>
+<body>
+	<canvas id="a"></canvas>
+	<script>
+		window.onload = function() {
+			var a_canvas = $("#a");
+			var context = a_canvas.get(0).getContext("2d");
+			
+			// reset canvas
+			a_canvas.attr("width",$(window).get(0).innerWidth);
+			a_canvas.attr("height",$(window).get(0).innerHeight);
+			context.fillStyle = "#F60";
+			context.fillRect(0, 0, a_canvas.width(), a_canvas.height());
+
+			function resizeCanvas() {
+				a_canvas.attr("width",$(window).get(0).innerWidth);
+				a_canvas.attr("height",$(window).get(0).innerHeight);
+				context.fillStyle = "#F60";
+				context.fillRect(0, 0, a_canvas.width(), a_canvas.height());
+			}
+			
+			// reset canvas again when window's size changed
+			$(window).resize(resizeCanvas);			
+		}
+	</script>
+</body>
+</html>
